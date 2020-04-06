@@ -80,7 +80,16 @@ class HashTable:
 
         Fill this in.
         '''
-        pass
+        # if self.storage[hashed_key] has a None value 
+            # return an error message 
+        # else 
+            # replace the self.storage[hashed_key] value with None 
+        hashed_key = self._hash_mod(key) 
+
+        if self.storage[hashed_key] == None:
+            print('Warning input key not found')
+        else:
+            self.storage[hashed_key] = None 
 
 
     def retrieve(self, key):
@@ -119,7 +128,9 @@ print(new_table._hash_mod('bird'))
 # interesting the created index is different everytime the code is ran. I hope this 
 # doesn't cause problems.
 new_table.insert('me', 'flea')
-new_table.retrieve('me')
+print(new_table.retrieve('me'))
+new_table.remove('me')
+print(new_table.retrieve('me'))
 
 
 
