@@ -89,6 +89,17 @@ class HashTable:
         '''
         pass
 
+## testing out the hashing function.
+# it seems that they are using the built in hash function in self._hash()
+# and using the self._mod_hash() divide the resulting hash value by 
+# self.capacity through modulo operator.
+
+new_table = HashTable(32) 
+print(new_table._hash_mod('bird'))
+print(new_table._hash_mod('bird'))
+# interesting the created index is different everytime the code is ran. I hope this 
+# doesn't cause problems.
+
 
 
 if __name__ == "__main__":
