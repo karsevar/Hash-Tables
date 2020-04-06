@@ -54,7 +54,21 @@ class HashTable:
 
         Fill this in.
         '''
-        pass
+        
+        # Basic insertion plan:
+        # create a new variable with the hashed key argument 
+        # check if hashed key exists:
+            # if yes send an error
+            # else add the value to the hashtable array through 
+            # the command self.storage[hashed_key] = value 
+
+        hashed_key = self._hash_mod(key) 
+
+        if self.storage[hashed_key] != None:
+            print('Index is already in use!')
+        else:
+            self.storage[hashed_key] = value
+
 
 
 
@@ -77,7 +91,12 @@ class HashTable:
 
         Fill this in.
         '''
-        pass
+        # basic plan:
+        # hash the key and place it in a new variable
+        # return self.storage[key]
+        hashed_key = self._hash_mod(key)
+
+        return self.storage[hashed_key]
 
 
     def resize(self):
@@ -95,10 +114,12 @@ class HashTable:
 # self.capacity through modulo operator.
 
 new_table = HashTable(32) 
-print(new_table._hash_mod('bird'))
+print(new_table._hash_mod('me'))
 print(new_table._hash_mod('bird'))
 # interesting the created index is different everytime the code is ran. I hope this 
 # doesn't cause problems.
+new_table.insert('me', 'flea')
+new_table.retrieve('me')
 
 
 
