@@ -104,11 +104,14 @@ class HashTable:
 
         while current_node:
             if current_node.key == key:
-                if current_node.next != None:
-                    past_node.next = current_node.next 
-                    break
                 if current_node.next == None and past_node == None:
                     self.storage[hashed_key] = None
+                    break
+                elif current_node.next != None and past_node == None:
+                    self.storage[hashed_key] = current_node.next
+                    break
+                elif current_node.next != None and past_node != None:
+                    past_node.next = current_node.next 
                     break
                 else:
                     past_node.next = None 
@@ -171,19 +174,30 @@ print(new_table._hash_mod('me_5'))
 # interesting the created index is different everytime the code is ran. I hope this 
 # doesn't cause problems.
 
-# new_table.insert('me_1', 'new_value') 
-# new_table.insert('me_2', 'second_value')
-# new_table.insert('me_3', 'third_value')
-# new_table.insert('me_4', 'fourth_value')
-# new_table.insert('me_5', 'fifth_value')
-# print(new_table.retrieve('me_1'))
-# new_table.remove('me_4')
-# print(new_table.retrieve('me_1'))
-# print(new_table.retrieve('me_2'))
-# print(new_table.retrieve('me_3'))
-# print(new_table.retrieve('me_4'))
+new_table.insert('me_1', 'new_value') 
+new_table.insert('me_2', 'second_value')
+new_table.insert('me_3', 'third_value')
+new_table.insert('me_4', 'fourth_value')
+new_table.insert('me_5', 'fifth_value')
+print(new_table.retrieve('me_1'))
+new_table.remove('me_1')
+print(new_table.retrieve('me_1'))
+print(new_table.retrieve('me_2'))
+print(new_table.retrieve('me_3'))
+print(new_table.retrieve('me_4'))
 
 ht = HashTable(8)
+
+print(ht._hash_mod("key-0"))
+print(ht._hash_mod("key-1"))
+print(ht._hash_mod("key-2"))
+print(ht._hash_mod("key-3"))
+print(ht._hash_mod("key-4"))
+print(ht._hash_mod("key-5"))
+print(ht._hash_mod("key-6"))
+print(ht._hash_mod("key-7"))
+print(ht._hash_mod("key-8"))
+print(ht._hash_mod("key-9"))
 
 ht.insert("key-0", "val-0")
 ht.insert("key-1", "val-1")
