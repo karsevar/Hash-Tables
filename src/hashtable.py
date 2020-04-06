@@ -70,11 +70,24 @@ class HashTable:
             # else continue to iterate through the linked list.
 
             current_node = self.storage[hashed_key] 
+            duplicate_bool = False
 
             while current_node.next != None:
-                current_node = current_node.next
+                if current_node.key == key:
+                    duplicate_bool = True
+                    break
+                else: 
+                    current_node = current_node.next
 
-            current_node.next = LinkedPair(key, value)
+            # if the next node after current node is None 
+                # create a new node with key and value pair 
+            # else do nothing 
+            if duplicate_bool == True:
+                current_node.value = value
+            elif current_node.key == key:
+                current_node.value = value 
+            else:
+                current_node.next = LinkedPair(key, value)
         else:
             self.storage[hashed_key] = LinkedPair(key, value)
 
@@ -209,8 +222,29 @@ ht.insert("key-6", "val-6")
 ht.insert("key-7", "val-7")
 ht.insert("key-8", "val-8")
 ht.insert("key-9", "val-9")
+print('\n initial additions \n')
+# print(ht.retrieve('key-0'))
+# print(ht.retrieve('key-1'))
 
+ht.insert("key-0", "new-val-0")
+ht.insert("key-1", "new-val-1")
+ht.insert("key-2", "new-val-2")
+ht.insert("key-3", "new-val-3")
+ht.insert("key-4", "new-val-4")
+ht.insert("key-5", "new-val-5")
+ht.insert("key-6", "new-val-6")
+ht.insert("key-7", "new-val-7")
 
+print(ht.retrieve('key-0'))
+print(ht.retrieve('key-1'))
+print(ht.retrieve('key-2'))
+print(ht.retrieve('key-3'))
+print(ht.retrieve('key-4'))
+print(ht.retrieve('key-5'))
+print(ht.retrieve('key-6'))
+print(ht.retrieve('key-7'))
+print(ht.retrieve('key-8'))
+print(ht.retrieve('key-9'))
 
 
 if __name__ == "__main__":
