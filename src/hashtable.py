@@ -110,9 +110,11 @@ class HashTable:
         hashed_key = self._hash_mod(key) 
         current_node = self.storage[hashed_key]
         past_node = None
+        found_node = False
 
         while current_node:
             if current_node.key == key:
+                found_node = True
                 if current_node.next == None and past_node == None:
                     self.storage[hashed_key] = None
                     break
@@ -130,7 +132,8 @@ class HashTable:
                 past_node = current_node 
                 current_node = current_node.next
         
-        print('Invalid key input')
+        if found_node == False:
+            print('Invalid key input')
             
 
 
