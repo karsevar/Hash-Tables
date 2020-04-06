@@ -65,9 +65,18 @@ class HashTable:
         hashed_key = self._hash_mod(key) 
 
         if self.storage[hashed_key] != None:
-            print('Index is already in use!')
+            # loop through the linked list 
+            # place the new value in the next linkedList if it is None 
+            # else continue to iterate through the linked list.
+
+            current_node = self.storage[hashed_key] 
+
+            while current_node.next != None:
+                current_node = current_node.next
+
+            current_node.next = LinkedPair(key, value)
         else:
-            self.storage[hashed_key] = value
+            self.storage[hashed_key] = LinkedPair(key, value)
 
 
 
@@ -80,16 +89,37 @@ class HashTable:
 
         Fill this in.
         '''
-        # if self.storage[hashed_key] has a None value 
-            # return an error message 
-        # else 
-            # replace the self.storage[hashed_key] value with None 
-        hashed_key = self._hash_mod(key) 
+        # first create a variable that holds the hashed_key 
+        # create a variable that holds the current node self.storage[hashed_key]
+        # create a variable that holds the past node 
 
-        if self.storage[hashed_key] == None:
-            print('Warning input key not found')
-        else:
-            self.storage[hashed_key] = None 
+        # loop through the linked list 
+            # if key equals current_node.key:
+                # modify previous_node.next to read current_node.next
+                # modify current_node to read None
+            # else modify past_node to current_node modify current_node to next node 
+        hashed_key = self._hash_mod(key) 
+        current_node = self.storage[hashed_key]
+        past_node = None
+
+        while current_node:
+            if current_node.key == key:
+                if current_node.next != None:
+                    past_node.next = current_node.next 
+                    break
+                if current_node.next == None and past_node == None:
+                    self.storage[hashed_key] = None
+                    break
+                else:
+                    past_node.next = None 
+                    break
+            
+            else:
+                past_node = current_node 
+                current_node = current_node.next
+        
+        print('Invalid key input')
+            
 
 
     def retrieve(self, key):
@@ -102,10 +132,20 @@ class HashTable:
         '''
         # basic plan:
         # hash the key and place it in a new variable
-        # return self.storage[key]
-        hashed_key = self._hash_mod(key)
+        # create a new variable that has the head node as the current_node 
+        # loop through the linked list until current_node has the same key 
+        # return the value through current_node.value 
 
-        return self.storage[hashed_key]
+        hashed_key = self._hash_mod(key) 
+        current_node = self.storage[hashed_key] 
+
+        while current_node:
+            if current_node.key == key:
+                return current_node.value
+            
+            current_node = current_node.next
+        
+        return None 
 
 
     def resize(self):
@@ -122,15 +162,40 @@ class HashTable:
 # and using the self._mod_hash() divide the resulting hash value by 
 # self.capacity through modulo operator.
 
-new_table = HashTable(32) 
-print(new_table._hash_mod('me'))
-print(new_table._hash_mod('bird'))
+new_table = HashTable(2) 
+print(new_table._hash_mod('me_1'))
+print(new_table._hash_mod('me_2'))
+print(new_table._hash_mod('me_3'))
+print(new_table._hash_mod('me_4'))
+print(new_table._hash_mod('me_5'))
 # interesting the created index is different everytime the code is ran. I hope this 
 # doesn't cause problems.
-new_table.insert('me', 'flea')
-print(new_table.retrieve('me'))
-new_table.remove('me')
-print(new_table.retrieve('me'))
+
+# new_table.insert('me_1', 'new_value') 
+# new_table.insert('me_2', 'second_value')
+# new_table.insert('me_3', 'third_value')
+# new_table.insert('me_4', 'fourth_value')
+# new_table.insert('me_5', 'fifth_value')
+# print(new_table.retrieve('me_1'))
+# new_table.remove('me_4')
+# print(new_table.retrieve('me_1'))
+# print(new_table.retrieve('me_2'))
+# print(new_table.retrieve('me_3'))
+# print(new_table.retrieve('me_4'))
+
+ht = HashTable(8)
+
+ht.insert("key-0", "val-0")
+ht.insert("key-1", "val-1")
+ht.insert("key-2", "val-2")
+ht.insert("key-3", "val-3")
+ht.insert("key-4", "val-4")
+ht.insert("key-5", "val-5")
+ht.insert("key-6", "val-6")
+ht.insert("key-7", "val-7")
+ht.insert("key-8", "val-8")
+ht.insert("key-9", "val-9")
+
 
 
 
