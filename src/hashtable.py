@@ -70,21 +70,17 @@ class HashTable:
             # else continue to iterate through the linked list.
 
             current_node = self.storage[hashed_key] 
-            duplicate_bool = False
 
             while current_node.next != None:
                 if current_node.key == key:
-                    duplicate_bool = True
                     break
                 else: 
                     current_node = current_node.next
 
             # if the next node after current node is None 
                 # create a new node with key and value pair 
-            # else do nothing 
-            if duplicate_bool == True:
-                current_node.value = value
-            elif current_node.key == key:
+            # else do nothing
+            if current_node.key == key:
                 current_node.value = value 
             else:
                 current_node.next = LinkedPair(key, value)
@@ -171,7 +167,31 @@ class HashTable:
 
         Fill this in.
         '''
-        pass
+
+        # Create a new HashTable instance. This new instance will have the 
+        # capacity of self.capacity * 2 
+
+        # loop through self.storage and place all buckets and nodes in the 
+        # new HashTable instance
+        # create a for loop that will loop through the buckets in self.storage
+            # create a current_node variable 
+            # while current_node is not None:
+                # place current_node.key and value into new HashTable instance through insert method  
+
+        # overwrite self with the new HashTable instance (experiment)
+        
+        new_hash_table = HashTable(self.capacity * 2)
+
+        for bucket in self.storage:
+            current_node = bucket
+
+            while current_node != None:
+                new_hash_table.insert(current_node.key, current_node.value)
+                current_node = current_node.next
+        # print('old storage', self.storage) 
+        self.capacity = new_hash_table.capacity 
+        self.storage = new_hash_table.storage
+        # print('new storage', self.storage)
 
 ## testing out the hashing function.
 # it seems that they are using the built in hash function in self._hash()
